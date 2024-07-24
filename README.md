@@ -4,7 +4,7 @@
 
 Versions
 
-```bash
+```sh
 # versions
 
 minikube version
@@ -19,7 +19,7 @@ docker version --format '{{.Client.Version}} (Client), {{.Server.Version}} (Serv
 
 ### 1. Minikube
 
-```bash
+```sh
 minikube start --driver=docker --cpus 4 --memory 14000 --kubernetes-version=1.29.2 --addons=ingress
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.8.0/cert-manager.yaml
 # wait until cert-manager is running
@@ -28,7 +28,7 @@ kubectl get all -n cert-manager
 
 ### 2. Elasticsearch
 
-```bash
+```sh
 helm repo add elastic https://helm.elastic.co  && helm repo update
 kubectl create -f https://download.elastic.co/downloads/eck/2.13.0/crds.yaml
 kubectl apply -f https://download.elastic.co/downloads/eck/2.13.0/operator.yaml
@@ -72,7 +72,7 @@ exit
 
 ### 3. Distribute SpringBoot Applications
 
-```bash
+```sh
 mvn clean package
 
 # use minikube docker deamon
@@ -91,7 +91,7 @@ kubectl get pods -l app.kubernetes.io/name=tracing && kubectl get svc -l app.kub
 
 ### 4. Deploying Jaeger-Operator and Jaeger-Instances
 
-```bash
+```sh
 helm install jaeger jaegertracing/jaeger-operator --version 2.53
 # wait until jaeger-operator is running
 kubectl get pods -w
@@ -135,7 +135,7 @@ kubectl port-forward svc/simple-prod-query 16686:16686 --namespace=default
 
 ### 5. Generate Traces
 
-```bash
+```sh
 kubectl port-forward svc/a-tracing 8099:80
 
 # access the microservice-a http://127.0.0.1:8099/generateTrace
@@ -149,6 +149,6 @@ http://127.0.0.1:16686/ is now showing the Jaeger-UI where the traces can be ana
 
 ### 6. Destroy Minikube
 
-```zsh
+```sh
 minikube delete --all
 ```
